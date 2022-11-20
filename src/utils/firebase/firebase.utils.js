@@ -52,9 +52,9 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   console.log('Done!');
 }
 
-export const getCollectionAndDocuments = async () => {
+export const getCollectionAndDocuments = async (collectionKey) => {
   // Create a collection Ref
-  const collectionRef = collection(db, 'categories');
+  const collectionRef = collection(db, collectionKey);
 
   // Generate query of the collection ref
   const q = query(collectionRef);
