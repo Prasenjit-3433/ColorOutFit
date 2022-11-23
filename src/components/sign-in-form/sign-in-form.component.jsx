@@ -3,9 +3,7 @@ import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import { Button, BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { googleSignInStart } from '../../store/user/user.action';
-
-import { signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+import { googleSignInStart, emailSignInStart } from '../../store/user/user.action';
 
 import { SignUpContainer, ButtonsContainer } from './sign-in-form.styles';
 
@@ -29,24 +27,8 @@ const SignInForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        try {
-            // Authenticate user
-            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-
-            resetFormFields();
-        } catch (error) {
-            switch(error.code) {
-                case 'auth/wrong-password':
-                    alert('Incorrect Password for email');
-                    break;
-                case 'auth/user-not-found': 
-                    alert('No user exists with this email');
-                    break;
-                default: 
-                    console.log(error)
-            }
-        }
+        dispatch(emailSignInStart(email, password));
+        resetFormFields();
     }
 
     const handleChange = (event) => {
