@@ -7,6 +7,8 @@ export type FetchCategoriesSuccess = ActionWithPayload<CATEGORIES_ACTION_TYPES.F
 
 export type FetchCategoriesFailed = ActionWithPayload<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, Error>;
 
+export type CategoryAction = FetchCategoriesStart | FetchCategoriesSuccess | FetchCategoriesFailed;
+
 // Regular actions
 export const fetchCategoriesStart = (): FetchCategoriesStart =>
   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
