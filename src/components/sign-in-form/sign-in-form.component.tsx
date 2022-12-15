@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
@@ -25,13 +25,13 @@ const SignInForm = () => {
         dispatch(googleSignInStart());
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(emailSignInStart(email, password));
         resetFormFields();
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         // destructure the name, value of that field from event.target
         const { name, value } = event.target;
         
@@ -46,7 +46,7 @@ const SignInForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormInput label='Email' type='email' required onChange={handleChange} name='email' value={email} />
 
-                <FormInput label='Password' type='password' required onChange={handleChange} minLength='6' name='password' value={password} />
+                <FormInput label='Password' type='password' required onChange={handleChange} minLength={6} name='password' value={password} />
                 
                 <ButtonsContainer>
                     <Button type='submit'>Sign In</Button>
